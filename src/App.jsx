@@ -1,3 +1,4 @@
+import "./App.css";
 import Header from "./components/Header";
 import { useState, useEffect } from "react";
 import { posts } from "./data/posts";
@@ -12,11 +13,17 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <Header />
-      {articles.map((article) => (
-        <Article article={article} />
-      ))}
+    <div className="containerw-full h-screen flex flex-col">
+      <div className="h-14 w-full bg-gray-800">
+        <Header />
+      </div>
+      <div className="flex-1 w-full flex flex-col items-center mt-10">
+        {articles.map((article) => (
+          <div className="mb-5 w-1/2 p-4 bg-gray-800">
+            <Article article={article} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
