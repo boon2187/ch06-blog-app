@@ -12,12 +12,12 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div>
       <Header />
       {articles.map((article) => (
-        <Article key={article.id} article={article} />
+        <Article article={article} />
       ))}
-    </>
+    </div>
   );
 }
 
