@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function Article() {
-  return <div>Article</div>;
+export default function Article({ article }) {
+  return <div>{article.title}</div>;
 }
