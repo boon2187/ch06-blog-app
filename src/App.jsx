@@ -1,11 +1,12 @@
 import "./App.css";
+import Articles from "./components/Articles";
+import Header from "./components/Header";
 
 function App() {
   return (
     <>
-      <p className="text-3xl font-bold underline">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Header />
+      <Articles />
     </>
   );
 }
