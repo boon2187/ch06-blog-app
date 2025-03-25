@@ -2,9 +2,9 @@ import React from "react";
 
 export default function Header() {
   return (
-    <div className="flex justify-between items-center px-10">
-      <h1>Blog</h1>
-      <button>お問い合わせ</button>
-    </div>
+    <header className="flex justify-between items-center px-10 bg-gray-900 h-[72px]">
+      <h2 className="text-xl text-white">Blog</h2>
+      <button className="text-white bg-gray-900 mt-1">お問い合わせ</button>
+    </header>
   );
 }

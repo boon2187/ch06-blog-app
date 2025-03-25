@@ -13,10 +13,8 @@ function App() {
   }, []);
 
   return (
-    <div className="containerw-full h-screen flex flex-col">
-      <div className="h-14 w-full bg-gray-800">
-        <Header />
-      </div>
+    <div className="w-full h-screen flex flex-col">
+      <Header />
       <div className="mt-10">
         <ul className="flex-1 w-full flex flex-col items-center">
           {articles.map((article) => (
