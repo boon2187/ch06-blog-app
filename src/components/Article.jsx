@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Article({ article }) {
+export default function Article({ post }) {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
@@ -25,9 +25,9 @@ export default function Article({ article }) {
   return (
     <div className="border border-gray-300 p-4 rounded-lg">
       <div className="flex justify-between items-center">
-        <div>{formatDate(article.createdAt)}</div>
+        <div>{formatDate(post.createdAt)}</div>
         <div className="flex gap-2">
-          {article.categories.map((category, index) => (
+          {post.categories.map((category, index) => (
             <span
               key={index}
               className="border border-blue-300 text-blue-500 p-1 rounded-md"
@@ -38,9 +38,9 @@ export default function Article({ article }) {
         </div>
       </div>
       <div className="text-left mt-4">
-        <h2 className="text-2xl font-bold">{article.title}</h2>
-        {formatContent(article.content)}
-        {article.content.replace(/<[^>]*>/g, "").length > 60 && "..."}
+        <h2 className="text-2xl font-bold">{post.title}</h2>
+        {formatContent(post.content)}
+        {post.content.replace(/<[^>]*>/g, "").length > 60 && "..."}
       </div>
     </div>
   );
