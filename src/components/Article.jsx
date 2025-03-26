@@ -20,7 +20,7 @@ export default function Article({ post }) {
   return (
     <div className="border border-gray-300 p-4 rounded-lg">
       <div className="flex justify-between items-center">
-        <div>{format(new Date(post.createdAt), "yyyy/MM/dd")}</div>
+        <div>{format(new Date(post.createdAt), "yyyy/M/d")}</div>
         <div className="flex gap-2">
           {post.categories.map((category, index) => (
             <span
