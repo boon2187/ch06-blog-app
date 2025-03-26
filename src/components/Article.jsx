@@ -1,11 +1,6 @@
 import React from "react";
-
+import { format } from "date-fns";
 export default function Article({ post }) {
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
-  };
-
   const formatContent = (content) => {
     // HTMLタグを改行に変換
     const textWithLineBreaks = content.replace(/<br\s*\/?>/g, "\n");
@@ -25,7 +20,7 @@ export default function Article({ post }) {
   return (
     <div className="border border-gray-300 p-4 rounded-lg">
       <div className="flex justify-between items-center">
-        <div>{formatDate(post.createdAt)}</div>
+        <div>{format(new Date(post.createdAt), "yyyy/MM/dd")}</div>
         <div className="flex gap-2">
           {post.categories.map((category, index) => (
             <span
