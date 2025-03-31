@@ -22,7 +22,10 @@ export default function Article({ post }) {
       </div>
       <div className="text-left mt-4">
         <h2 className="text-2xl font-bold">{post.title}</h2>
-        <div dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
+        <div
+          className="line-clamp-2"
+          dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+        />
       </div>
     </div>
   );
