@@ -1,6 +1,10 @@
 import React from "react";
 import { format } from "date-fns";
+import DOMPurify from "dompurify";
+
 export default function Article({ post }) {
+  const sanitizedContent = DOMPurify.sanitize(post.content);
+
   return (
     <div className="border border-gray-300 p-4 rounded-lg">
       <div className="flex justify-between items-center">
@@ -18,7 +22,7 @@ export default function Article({ post }) {
       </div>
       <div className="text-left mt-4">
         <h2 className="text-2xl font-bold">{post.title}</h2>
-        <div dangerouslySetInnerHTML={{ __html: post.content }} />
+        <div dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
       </div>
     </div>
   );
