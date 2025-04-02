@@ -19,22 +19,31 @@ export default function ArticleDetails() {
   return (
     <div className="w-full h-screen flex flex-col">
       <Header />
-      <div className="flex flex-col">
+      <div className="flex flex-col max-w[800px] mt-12 mx-auto">
         <img src={post.thumbnailUrl} alt={post.title} />
-        <div>
-          <div>{format(new Date(post.createdAt), "yyyy/M/d")}</div>
-          <div>
-            {post.categories.map((category, index) => (
-              <span
-                key={index}
-                className="border border-blue-300 text-blue-500 p-1 rounded-md"
-              >
-                {category}
-              </span>
-            ))}
+        <div className="flex flex-col gap-4">
+          <div className="flex justify-between p-2">
+            <div className="text-gray-500">
+              {format(new Date(post.createdAt), "yyyy/M/d")}
+            </div>
+            <div className="flex gap-2">
+              {post.categories.map((category, index) => (
+                <span
+                  key={index}
+                  className="border border-blue-300 text-blue-500 p-1 rounded-md"
+                >
+                  {category}
+                </span>
+              ))}
+            </div>
           </div>
-          <div>{post.title}</div>
-          <div dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
+          <div className="text-left">
+            <h2 className="text-2xl font-semibold">{post.title}</h2>
+            <p
+              className="mt-6"
+              dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+            />
+          </div>
         </div>
       </div>
     </div>
