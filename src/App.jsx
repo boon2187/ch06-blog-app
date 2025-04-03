@@ -1,22 +1,20 @@
 import "./App.css";
 import Header from "./components/Header";
-import { posts } from "./data/posts";
-import Article from "./components/Article";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./components/Home";
+import ArticleDetails from "./components/ArticleDetails";
 
 function App() {
   return (
-    <div className="w-full h-screen flex flex-col">
-      <Header />
-      <div className="mt-10">
-        <ul className="flex-1 w-full flex flex-col items-center">
-          {posts.map((post) => (
-            <li key={post.id} className="mb-5 w-1/2 p-4">
-              <Article post={post} />
-            </li>
-          ))}
-        </ul>
+    <BrowserRouter>
+      <div className="w-full h-screen flex flex-col">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/posts/:id" element={<ArticleDetails />} />
+        </Routes>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 
