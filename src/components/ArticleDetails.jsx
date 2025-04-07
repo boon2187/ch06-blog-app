@@ -6,29 +6,35 @@ import { useParams } from "react-router-dom";
 export default function ArticleDetails() {
   const { id } = useParams();
   const [post, setPost] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchPost = async () => {
-      const response = await fetch(
-        `https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts/${id}`
-      );
-      const data = await response.json();
-      setPost(data.post);
+      setIsLoading(true);
+      try {
+        // await new Promise((resolve) => setTimeout(resolve, 5000));
+
+        const response = await fetch(
+          `https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts/${id}`
+        );
+        const data = await response.json();
+        setPost(data.post);
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchPost();
   }, []);
 
-  if (!post) {
-    return (
-      <div className="flex flex-col max-w-[800px] mt-12 mx-auto">
-        <p>記事が見つかりませんでした。</p>
-      </div>
-    );
-  }
-
-  const sanitizedContent = DOMPurify.sanitize(post.content);
-
-  return (
+  return isLoading ? (
+    <div className="h-screen flex items-center justify-center">
+      <p className="text-lg">読み込み中...</p>
+    </div>
+  ) : !post ? (
+    <div className="flex flex-col max-w-[800px] mt-12 mx-auto">
+      <p>記事が見つかりませんでした。</p>
+    </div>
+  ) : (
     <div className="flex flex-col max-w-[800px] mt-12 mx-auto">
       <img src={post.thumbnailUrl} alt={post.title} />
       <div className="flex flex-col gap-4">
@@ -51,7 +57,9 @@ export default function ArticleDetails() {
           <h2 className="text-2xl font-semibold">{post.title}</h2>
           <p
             className="mt-6"
-            dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(post.content),
+            }}
           />
         </div>
       </div>

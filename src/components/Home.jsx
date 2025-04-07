@@ -3,19 +3,31 @@ import Article from "./Article";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch(
-        "https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts"
-      );
-      const data = await response.json();
-      setPosts(data.posts);
+      setIsLoading(true);
+      try {
+        // await new Promise((resolve) => setTimeout(resolve, 5000));
+
+        const response = await fetch(
+          "https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts"
+        );
+        const data = await response.json();
+        setPosts(data.posts);
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchPosts();
   }, []);
 
-  return (
+  return isLoading ? (
+    <div className="h-screen flex items-center justify-center">
+      <p className="text-lg">読み込み中...</p>
+    </div>
+  ) : (
     <div className="mt-10">
       <ul className="flex-1 w-full flex flex-col items-center">
         {posts.map((post) => (
