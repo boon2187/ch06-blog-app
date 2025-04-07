@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
 import DOMPurify from "dompurify";
 import { useParams } from "react-router-dom";
-import { posts } from "../data/posts";
 
 export default function ArticleDetails() {
   const { id } = useParams();
-  const post = posts.find((post) => post.id === Number(id));
+  const [post, setPost] = useState(null);
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      const response = await fetch(
+        `https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts/${id}`
+      );
+      const data = await response.json();
+      setPost(data.post);
+    };
+    fetchPost();
+  }, [id]);
 
   if (!post) {
     return (
