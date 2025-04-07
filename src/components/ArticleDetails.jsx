@@ -16,7 +16,7 @@ export default function ArticleDetails() {
       setPost(data.post);
     };
     fetchPost();
-  }, [id]);
+  }, []);
 
   if (!post) {
     return (
