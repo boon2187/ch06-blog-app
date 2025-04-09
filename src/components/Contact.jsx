@@ -43,6 +43,14 @@ export default function Contact() {
     setShowValidation(false);
 
     try {
+      const requestBody = {
+        name: data.name,
+        email: data.email,
+        message: data.message,
+      };
+
+      console.log("送信データ:", requestBody);
+
       const response = await fetch(
         "https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/contacts",
         {
@@ -50,17 +58,16 @@ export default function Contact() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            name: data.name,
-            email: data.email,
-            message: data.message,
-          }),
+          body: JSON.stringify(requestBody),
         }
       );
 
       if (!response.ok) {
         throw new Error(`エラー: ${response.status}`);
       }
+
+      const responseData = await response.json();
+      console.log("APIレスポンス:", responseData);
 
       alert("送信しました");
       reset();
