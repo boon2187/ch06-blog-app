@@ -26,15 +26,23 @@ export default function ArticleDetails() {
     fetchPost();
   }, []);
 
-  return isLoading ? (
-    <div className="h-screen flex items-center justify-center">
-      <p className="text-lg">読み込み中...</p>
-    </div>
-  ) : !post ? (
-    <div className="flex flex-col max-w-[800px] mt-12 mx-auto">
-      <p>記事が見つかりませんでした。</p>
-    </div>
-  ) : (
+  if (isLoading) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <p className="text-lg">読み込み中...</p>
+      </div>
+    );
+  }
+
+  if (!post) {
+    return (
+      <div className="flex flex-col max-w-[800px] mt-12 mx-auto">
+        <p>記事が見つかりませんでした。</p>
+      </div>
+    );
+  }
+
+  return (
     <div className="flex flex-col max-w-[800px] mt-12 mx-auto">
       <img src={post.thumbnailUrl} alt={post.title} />
       <div className="flex flex-col gap-4">

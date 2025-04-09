@@ -23,11 +23,15 @@ export default function Home() {
     fetchPosts();
   }, []);
 
-  return isLoading ? (
-    <div className="h-screen flex items-center justify-center">
-      <p className="text-lg">読み込み中...</p>
-    </div>
-  ) : (
+  if (isLoading) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <p className="text-lg">読み込み中...</p>
+      </div>
+    );
+  }
+
+  return (
     <div className="mt-10">
       <ul className="flex-1 w-full flex flex-col items-center">
         {posts.map((post) => (
