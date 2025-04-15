@@ -2,6 +2,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import Label from "./Label";
+import Input from "./Input";
+import TextArea from "./TextArea";
 
 const schema = z.object({
   name: z
@@ -91,72 +94,39 @@ export default function Contact() {
 
         <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-5">
           <div className="flex items-center">
-            <label
-              htmlFor="name"
-              className="w-32 text-sm font-medium text-left"
-            >
-              お名前
-            </label>
-            <div className="flex-1">
-              <input
-                id="name"
-                type="text"
-                className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                {...register("name")}
-                disabled={isSubmitting}
-              />
-              {showValidation && errors.name && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.name.message}
-                </p>
-              )}
-            </div>
+            <Label htmlFor="name">お名前</Label>
+            <Input
+              id="name"
+              register={register}
+              isSubmitting={isSubmitting}
+              showValidation={showValidation}
+              errors={errors}
+            />
           </div>
 
           <div className="flex items-center">
-            <label
-              htmlFor="email"
-              className="w-32 text-sm font-medium text-left"
-            >
-              メールアドレス
-            </label>
-            <div className="flex-1">
-              <input
-                id="email"
-                type="email"
-                className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                {...register("email")}
-                disabled={isSubmitting}
-              />
-              {showValidation && errors.email && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.email.message}
-                </p>
-              )}
-            </div>
+            <Label htmlFor="email">メールアドレス</Label>
+            <Input
+              id="email"
+              type="email"
+              register={register}
+              isSubmitting={isSubmitting}
+              showValidation={showValidation}
+              errors={errors}
+            />
           </div>
 
           <div className="flex">
-            <label
-              htmlFor="message"
-              className="w-32 text-sm font-medium pt-2 text-left"
-            >
+            <Label htmlFor="message" className="pt-2">
               本文
-            </label>
-            <div className="flex-1">
-              <textarea
-                id="message"
-                rows="5"
-                className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                {...register("message")}
-                disabled={isSubmitting}
-              ></textarea>
-              {showValidation && errors.message && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.message.message}
-                </p>
-              )}
-            </div>
+            </Label>
+            <TextArea
+              id="message"
+              register={register}
+              isSubmitting={isSubmitting}
+              showValidation={showValidation}
+              errors={errors}
+            />
           </div>
 
           <div className="pt-5 flex gap-3 justify-center">
