@@ -19,14 +19,13 @@ const schema = z.object({
 });
 
 export default function Contact() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [showValidation, setShowValidation] = useState(false);
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -39,7 +38,6 @@ export default function Contact() {
   });
 
   const onSubmit = async (data) => {
-    setIsSubmitting(true);
     setShowValidation(false);
 
     try {
@@ -74,8 +72,6 @@ export default function Contact() {
     } catch (error) {
       console.error("送信エラー:", error);
       alert(`送信に失敗しました: ${error.message}`);
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
